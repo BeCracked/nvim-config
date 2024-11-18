@@ -29,6 +29,8 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
+-- Set highlight on search
+vim.opt.hlsearch = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -61,5 +63,8 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- NOTE: You should make sure your terminal supports this
+vim.o.termguicolors = true
 
 -- vim: ts=2 sts=2 sw=2 et
