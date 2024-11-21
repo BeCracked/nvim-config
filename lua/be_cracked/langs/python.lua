@@ -1,5 +1,5 @@
-local util = require 'lspconfig.util'
-local path = require('lspconfig.util').path
+local util = require 'be_cracked.util.fs'
+local path = require('be_cracked.util.fs').path
 
 local M = {}
 
@@ -16,24 +16,30 @@ local function find_venv_dir(startpath)
   return path.join(ancestor, '.venv')
 end
 
-local function get_venv_dir(project_path)
+function M.get_venv_dir(project_path)
   return os.getenv 'VIRTUAL_ENV' or find_venv_dir(project_path)
 end
 
-local function activate_venv(venv_dir)
+function M.activate_venv(venv_dir)
   vim.env.VIRTUAL_ENV = venv_dir
   vim.env.PATH = path.join(venv_dir, 'bin') .. ':' .. vim.env.PATH
 end
 
--- Get the ruff binary for the project of the current cwd if any
--- Defaults to "ruff" if no venv is detected or found
-function M.get_project_ruff_bin(project_path)
-  local venv_dir = get_venv_dir(project_path)
+function M.deactivate_venv()
+  vim.env.VIRTUAL_ENV = nil
+  vim.env.PATH = nil
+end
+
+-- Get the provided binary for the active venv or the given project (defaults to cwd)
+-- Defaults to the provided binary if no venv is detected or found
+function M.get_project_binary(binary, project_path)
+  project_path = project_path or vim.fn.getcwd()
+  local venv_dir = M.get_venv_dir(project_path)
   if venv_dir then
-    local ruff_path = path.join(venv_dir, 'bin', 'ruff')
-    return ruff_path
+    local python_path = path.join(venv_dir, 'bin', binary)
+    return python_path
   else
-    return 'ruff'
+    return binary
   end
 end
 

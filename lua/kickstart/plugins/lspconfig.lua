@@ -208,7 +208,7 @@ return {
           },
         },
         ruff = {
-          cmd = { require('be_cracked.langs.python').get_project_ruff_bin(vim.fn.getcwd()), 'server' },
+          cmd = { require('be_cracked.langs.python').get_project_binary 'ruff', 'server' },
           settings = {
             nativeServer = 'auto',
             args = {},
