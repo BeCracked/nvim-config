@@ -21,10 +21,10 @@ keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-keymap('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-keymap('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-keymap('n', '<C-down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-keymap('n', '<C-up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+keymap('n', '<C-A-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+keymap('n', '<C-A-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+keymap('n', '<C-A-down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+keymap('n', '<C-A-up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Keymaps for better default experience
 -- Remap for dealing with word wrap
