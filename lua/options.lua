@@ -55,6 +55,10 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Make tabs be spaces and set tab width
+vim.opt.shiftwidth = 4
+vim.opt.smarttab = true
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
