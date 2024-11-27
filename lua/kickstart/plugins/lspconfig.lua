@@ -214,6 +214,10 @@ return {
             args = {},
           },
         },
+        yamlls = {
+          cmd = { 'yaml-language-server', '--stdio' },
+          filetypes = { 'yaml' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
