@@ -14,7 +14,7 @@ return {
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -29,8 +29,26 @@ return {
           }
         end
       end,
+      formatters = {
+        uv_local_ruff = {
+          command = 'uv',
+          args = { 'run', 'ruff', 'format', '--stdin-filename', '$RELATIVE_FILEPATH', '-' },
+        },
+        uvx_ruff = {
+          command = 'uvx',
+          args = { 'ruff', 'format', '--stdin-filename', '$RELATIVE_FILEPATH', '-' },
+        },
+        uvx_mdformat = {
+          command = 'uvx',
+          args = { 'mdformat', '-' },
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
+        python = { 'uv_local_ruff', 'ruff', 'uvx_ruff', stop_after_first = true },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
+        markdown = { 'uvx_mdformat' },
+
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
