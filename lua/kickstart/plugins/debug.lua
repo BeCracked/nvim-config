@@ -77,6 +77,13 @@ return {
       end,
       desc = 'Debug: See last session result.',
     },
+    {
+      '<F8>',
+      function()
+        require('dap').terminate()
+      end,
+      desc = 'Debug: Terminate the current session.',
+    },
   },
   config = function()
     local dap = require 'dap'
@@ -138,16 +145,23 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
+    --
+    configurations =
+      {
+        python = { justMyCode = false },
       },
-    }
+      -- Install golang specific config
+      require('dap-go').setup {
+        delve = {
+          -- On Windows delve must be run attached or it crashes.
+          -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+          detached = vim.fn.has 'win32' == 0,
+        },
+      }
 
     -- Install python specific config
-    require('dap-python').setup(require('be_cracked.langs.python').get_project_binary 'python')
+    require('dap-python').setup 'uv'
+    -- Use python environment directly
+    -- require('dap-python').setup(require('be_cracked.langs.python').get_project_binary 'python')
   end,
 }
