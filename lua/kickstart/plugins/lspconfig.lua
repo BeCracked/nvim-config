@@ -250,6 +250,10 @@ return {
           cmd = { 'yaml-language-server', '--stdio' },
           filetypes = { 'yaml' },
         },
+        bashls = {
+          cmd = { 'bash-language-server', 'start' },
+          filetypes = { 'bash', 'sh' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -267,7 +271,9 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        -- Additional bashls requirements
+        'shellcheck',
+        'shfmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
