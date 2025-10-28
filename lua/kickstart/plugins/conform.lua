@@ -45,19 +45,23 @@ return {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        -- You can use 'stop_after_first' to run the first available formatter from the list
         python = { 'uv_local_ruff', 'ruff', 'uvx_ruff', stop_after_first = true },
         rust = { 'rustfmt', lsp_format = 'fallback' },
         markdown = { 'uvx_mdformat' },
         yaml = { 'yamlfmt', lsp_format = 'fallback' },
         bash = { 'shfmt' },
-
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
+    config = function(_, opts)
+      require('conform').setup(opts)
+      -- Set up mason-conform to auto install used formatters
+      require('mason-conform').setup {
+        ignore_install = {}, -- List of formatters to ignore during install
+      }
+    end,
   },
+  -- Install mason-conform alongside conform
+  { 'zknx/mason-conform.nvim' },
 }
 -- vim: ts=2 sts=2 sw=2 et
