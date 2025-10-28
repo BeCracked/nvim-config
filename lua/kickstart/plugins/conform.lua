@@ -48,6 +48,7 @@ return {
         python = { 'uv_local_ruff', 'ruff', 'uvx_ruff', stop_after_first = true },
         rust = { 'rustfmt', lsp_format = 'fallback' },
         markdown = { 'uvx_mdformat' },
+        yaml = { 'yamlfmt', lsp_format = 'fallback' },
         bash = { 'shfmt' },
 
         -- Conform can also run multiple formatters sequentially
