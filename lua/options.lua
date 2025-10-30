@@ -66,6 +66,16 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 
+-- Folds - https://neovim.io/doc/user/fold.html#Folding
+-- Configuration guide: https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldminlines = 4
+vim.opt.foldtext = '' -- Make first line of fold be syntax highlighted
+vim.opt.foldlevel = 0 -- Set minimum level of fold to be closed by default
+vim.opt.foldlevelstart = 1 -- Close everything but toplevel upon editing buffer
+vim.opt.foldnestmax = 4
+
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
