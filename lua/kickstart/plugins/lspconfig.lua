@@ -11,6 +11,28 @@ return {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
       },
     },
+    {
+      'ray-x/lsp_signature.nvim',
+      event = 'InsertEnter',
+      opts = {
+        bind = true,
+        handler_opts = {
+          border = 'rounded',
+        },
+      },
+      config = function(_, opts)
+        vim.keymap.set({ 'n' }, '<C-s>', function()
+          require('lsp_signature').toggle_float_win()
+        end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+        vim.keymap.set({ 'n' }, '<Leader>k', function()
+          vim.lsp.buf.signature_help()
+        end, { silent = true, noremap = true, desc = 'toggle signature' })
+        require('lsp_signature').setup(opts)
+      end,
+      -- or use config
+      -- config = function(_, opts) require'lsp_signature'.setup({you options}) end
+    },
   },
   {
     -- Main LSP Configuration
@@ -28,6 +50,9 @@ return {
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
+
+      -- Signature help windows
+      'ray-x/lsp_signature.nvim',
     },
     config = function()
       -- Brief aside: **What is LSP?**
