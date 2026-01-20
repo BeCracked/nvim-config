@@ -51,6 +51,12 @@ return {
         markdown = { 'uvx_mdformat' },
         yaml = { 'yamlfmt', lsp_format = 'fallback' },
         bash = { 'shfmt' },
+        javascript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        css = { 'prettier' },
+        html = { 'prettier' },
       },
     },
     config = function(_, opts)
