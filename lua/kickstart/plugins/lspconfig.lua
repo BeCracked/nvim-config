@@ -279,6 +279,10 @@ return {
           cmd = { 'bash-language-server', 'start' },
           filetypes = { 'bash', 'sh' },
         },
+        ts_ls = {
+          cmd = { 'typescript-language-server', '--stdio' },
+          filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
